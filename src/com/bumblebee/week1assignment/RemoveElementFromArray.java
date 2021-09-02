@@ -1,4 +1,4 @@
-package com.bumblebee;
+package com.bumblebee.week1assignment;
 
 /*
 1) Did I understand the problem? Yes or No !!
@@ -42,9 +42,28 @@ package com.bumblebee;
         *   -> Brute Force (Standard) --> using for loop --> Without considering this Time complexity and space complexity,
         *   Other optimised solutions
 */
-public class TwoSumProblem {
+public class RemoveElementFromArray {
+
+    public static void main(String[] args) {
+        int arr[] = {1, 6, 2, 2, 8, 12, 6};
+        int target = 2;
+        int count = 0;
+       // List<Integer> targetList = new ArrayList<>();
+        for (int i = 0; i < arr.length; i++) {
 
 
+            if (arr[i] == target) {
+                count++;
+            }
+        }
+            int targetArray[] = new int[arr.length - count];
+            for (int i = 0; i < arr.length; i++) {
 
-}
 
+                if (arr[i] != target) {
+                    targetArray[i] = arr[i];
+                }
+            }
+
+        }
+    }

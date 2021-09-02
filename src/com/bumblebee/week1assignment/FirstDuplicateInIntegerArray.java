@@ -1,4 +1,4 @@
-package com.bumblebee;
+package com.bumblebee.week1assignment;
 
 /*
 1) Did I understand the problem? Yes or No !!
