@@ -1,6 +1,5 @@
 package com.bumblebee.assessment;
 
-import com.bumblebee.week4.linkedlist.MergeLinkedList;
 import org.junit.Test;
 
 import java.util.HashSet;

@@ -1,56 +1,23 @@
 package com.bumblebee.week4.linkedlist;
 
-/*
-*
-*  *
- * currentNode1 is of linked list 1
- * currentNode2 is of linked list 2
-
-
- *
-if(currentNode1.next ==null)
-CurrentNode3 = add(currentNode2)
-currentNode2 = CurrentNode2.next
-currentNode1.value<currentNode2.value ->
-Add currentNode1 value to new node
-CurrentNode3 = add(currentNode1)
-CurrentNode1 = currentNode1.next
-
-
-
-if(currentNode2.next ==null)
-CurrentNode3 = add(currentNode1)
-currentNode1 = CurrentNode1.next
-currentNode2.value<currentNode1.value ->
-Add currentNode2 value  to new node
-CurrentNode3 = add(currentNode2)
-CurrentNode2 = currentNode2.next
-*
-* */
-
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.LinkedList;
-
 public class MergeLinkedList {
-
     public class Node{
         int value;
         Node next;
+        Node(){
+            next = null;
+        }
         Node(int key){
             this.value = key;
             next = null;
         }
-
-        Node(){
-            next = null;
-        }
     }
+
     public Node addNode(int key) {
         return new Node(key);
     }
-
 
     public void printAllNodes(Node node) {
         while(node != null) {
@@ -59,43 +26,70 @@ public class MergeLinkedList {
         }
     }
 
-    public Node printOddNodes(Node node) {
-        Node oddNode = new Node();
-        Node current = oddNode;
-
-
-        while(node != null) {
-            current.next = node;
-            if(node.next != null) {
-                node = node.next.next;
-                current = current.next;
+    public Node mergeNodes1(Node node1, Node node2) {
+        // create a new node (merged), current node
+        Node merged = new Node();
+        Node current = merged;
+        while(node1 != null && node2 != null) {
+            if(node1.value < node2.value) {
+                current.next = node1;
+                node1 = node1.next;
+            } else {
+                current.next = node2;
+                node2 = node2.next;
             }
-            else {
-                current.next.next = null;
-                break;
-            }
-
+            current = current.next;
         }
-        return oddNode.next;
+        current.next = node1 == null ? node2 : node1;
+        return merged.next;
     }
 
-    public void mergeAllNodes(LinkedList lst1, LinkedList lst2) {
-       /* Node currentNode1 = lst1.getFirst();
-        while(currenNode1 != null) {
-            System.out.println(node.value);
-            node = node.next;
-        }*/
+
+    // 2 + 2 + 3 + 4
+    private int sum(int a, int b) {
+        return a+b;
+    }
+
+    int[] data = {2,2,4,3,6,1,3};
+
+
+
+    // Recursive Algo
+    /*
+     * 1) Break point to come out of the recursion
+     * 2) What condition you need to call the recursion
+     * 3) What argument / value pass to the recursion
+     *
+     */
+    public Node mergeNodes(Node node1, Node node2) {
+
+        if(node1 == null) // break point
+            return node2;
+
+        if(node2 == null)
+            return node1;
+
+        // compare
+        if(node1.value < node2.value) {
+            node1.next = mergeNodes(node1.next,node2);
+            return node1;
+        } else {
+            node2.next = mergeNodes(node1, node2.next);
+            return node2;
+        }
     }
 
     @Test
     public void test1() {
-        Node head = addNode(1);
-        head.next = addNode(2);
-        head.next.next = addNode(3);
-        head.next.next.next = addNode(4);
-        head.next.next.next.next = addNode(5);
-        head.next.next.next.next.next = addNode(6);
-        printAllNodes(printOddNodes(head));
-    }
+        Node head1 = addNode(1);
+        head1.next = addNode(3);
+        head1.next.next = addNode(5);
 
+        Node head2 = addNode(2);
+        head2.next = addNode(4);
+        head2.next.next = addNode(6);
+
+        Node mergeNodes = mergeNodes1(head1, head2);
+        printAllNodes(mergeNodes);
+    }
 }

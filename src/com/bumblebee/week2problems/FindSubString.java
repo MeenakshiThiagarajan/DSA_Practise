@@ -100,7 +100,7 @@ public class FindSubString {
     public void test3() {
         int[] input = {1,2,3,1,2,3};
         int k = 2;
-        Assert.assertTrue(findIfPresent(input,k));
+        Assert.assertFalse(findIfPresent(input,k));
     }
 
     @Test
@@ -117,6 +117,13 @@ public class FindSubString {
         Assert.assertTrue(findIfPresent(input,k));
     }
 
+    @Test
+    public void test6() {
+        int[] input = {1,2,3,1,2,3};
+        int k = 2;
+        Assert.assertFalse(findIfPresent(input,k));
+    }
+
     /*
     * Time Complexity -> O(n) + O(m) -> O(m)
     * Space complexity -> O(n)
@@ -130,9 +137,9 @@ public class FindSubString {
             if(!set.add(input[i])) return true;//to check duplicates within first window size
         }
 
-        for(int i=1; i<=input.length-k; i++) {
+        for(int i=1; i<input.length-k; i++) {
             set.remove(input[i-1]); // Deleting previous window element at the index(i-1)
-            if(!set.add(input[i+k-1])) return true;
+            if(!set.add(input[i+k])) return true;
         }
         return false;
     }

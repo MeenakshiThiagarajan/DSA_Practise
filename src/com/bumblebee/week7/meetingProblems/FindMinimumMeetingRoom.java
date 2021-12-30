@@ -8,7 +8,8 @@ import java.util.Arrays;
 public class FindMinimumMeetingRoom {
     @Test
     public void test1() {
-        String[][] meetingTimings = {{"09 00", "09 45"},{"09 30", "10 30"},{"10 40", "12 00"},{"11 00", "13 00"},{"11 45", "14 00"},{"16 00", "17 00"}};
+        String[][] meetingTimings = {{"09 00", "09 45"},{"09 30", "10 30"},{"10 40", "12 00"},{"11 00", "13 00"},
+                {"11 45", "14 00"},{"16 00", "17 00"}};
         System.out.println(findMinMeetingRoomCount(meetingTimings));
         Assert.assertEquals(3,findMinMeetingRoomCount(meetingTimings));
     }

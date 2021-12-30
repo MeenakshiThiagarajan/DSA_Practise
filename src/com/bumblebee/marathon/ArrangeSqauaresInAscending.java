@@ -8,38 +8,52 @@ public class ArrangeSqauaresInAscending {
 
     @Test
     public void test1() {
-        int[] input = {-2,0,4};
+        int[] input = {-10000, -9999, -7, -5, 0, 0, 10000};
         System.out.println(Arrays.toString(sortSquares(input)));
         //Assert.assertEquals(0, returnProductOfAllNums(input));
     }
 
-    private int[] sortSquares(int[] input) {
-        int left = 0, right = input.length-1;
-        int[] result = new int[input.length];
+    private int[] sortSquares(int[] nums) {
+        int left = 0, right = nums.length - 1;
+        int[] result = new int[nums.length];
 
-        while(left<=right) {
-            if(Math.abs(input[left])> Math.abs(input[right])){
-                int temp = input[right];
-                input[right] = input[left];
-                input[left] = temp;
+        while (left <= right) {
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                int temp = nums[right];
+                nums[right] = nums[left];
+                nums[left] = temp;
                 //result[right] = input[right] * input[right];
                 right--;
             }
-             if(Math.abs(input[left])<Math.abs(input[right])) {
-                //result[right] = input[right] * input[right];
-                right--;
+            if (Math.abs(nums[left]) < Math.abs(nums[right])) {
+                if (Math.abs(nums[right - 1]) < Math.abs(nums[right]))
+                    //result[right] = input[right] * input[right];
+                    right--;
+                else {
+                    int temp = nums[right];
+                    nums[right] = nums[right - 1];
+                    nums[right - 1] = temp;
+                    //result[right] = input[right] * input[right];
+                    right--;
+                }
             }
-            if(Math.abs(input[left])==Math.abs(input[right]) || left==right){
+            if (Math.abs(nums[left]) == Math.abs(nums[right]) || left == right) {
                 //result[right] = input[right]*input[right];
-                right--;
+                if (Math.abs(nums[right - 1]) < Math.abs(nums[right])) {
+                    //result[right] = input[right] * input[right];
+                    right--;
+                } else {
+                    left++;
+                }
             }
         }
-        for (int i = 0; i < input.length; i++) {
-            input[i] = input[i] * input[i];
+        for (int i = 0; i < nums.length; i++) {
+            nums[i] = nums[i] * nums[i];
         }
 
-        return input;
+        return nums;
     }
-
-
 }
+
+
+

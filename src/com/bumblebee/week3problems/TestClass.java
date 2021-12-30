@@ -74,13 +74,32 @@ Question : Given an array of integers and an integer k, find out whether there a
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class TestClass {
     @Test
     public void test1() {
-        String s1 = "ab";
+        String s1 = "ab#cde#f";
         String s2 = "bacd";
         //System.out.println(permutationsInString(s1, s2));
         //Assert.assertTrue(permutationsInStringUsingMap(s1, s2));
         //Assert.assertTrue(permutationsInString(s1, s2));
+        returnReverse(s1);
+    }
+
+    private String returnReverse(String s){
+        int left = 0, right = s.length()-1;
+        char[] chars = s.toCharArray();
+        while(left<right){
+            if(chars[left]=='#') left++;
+            if(chars[right]=='#') right--;
+            if(chars[left]!='#' && chars[right]!='#') {
+                char temp = chars[right];
+                chars[right--] = chars[left];
+                chars[left++] = temp;
+            }
+        }
+        System.out.println(Arrays.toString(chars));
+        return Arrays.toString(chars);
     }
 }
